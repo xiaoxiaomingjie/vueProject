@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="./lib/normalize.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>计划表</title>
+</head>
+<body>
+    <!--1.先确定页面的结构和基础样式-->
+    <div id="main">
+        <div class="sidebar">
+            <h1>计划表</h1>
+        </div>
+        <div class="header">
+            作业写完了么就玩儿
+        </div>
+        <form @submit.prevent="merge" id="task-form">
+            <div class="wrap">
+                <input v-model="current.title" id="task-input" type="text" autocomplete="false">
+                <div v-if="current.id" class="detail">
+                    <textarea v-model="current.desc"></textarea>
+                    <input v-model="current.alert_at" type="datetime-local">
+                    <button class="primary" type="submit">submit</button>
+                </div>
+
+            </div>
+        </form>
+        <div class="task-list">
+            <div class="wrap">
+                <div class="segment-title">未完成</div>
+                <!--把列表封装成一个组件task，需要的数据通过todo到子组件-->
+                <!--迭代组件-->
+                <task :todo="todo"
+                      v-if="!todo.completed"
+                      v-for="(todo,index) in list">
+                </task>
+
+            </div>
+        </div>
+        <div class="task-list"><!--vue中数据是从父组件流向子组件，子组件不能操作父组件的数据。-->
+            <div class="wrap">
+                <div class="segment-title">已完成</div>
+                <div v-if="todo.completed" v-for="(todo,index) in list" class="item completed">
+                    <div class="toggle_complete" @click="toggle_complete(todo.id)"></div>
+                    <span class="title">
+                        {{todo.title}}
+                    </span>
+                    <button @click="remove(todo.id)">删除</button>
+                    <button @click="set_current(todo)">更新</button>
+                    <button @click="toggle_detail(todo.id)">详情</button>
+                    <div v-if="todo.show_detail" class="detail">
+                        {{todo.desc || '暂无详情'}}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio controls id="alert_sound" src="sound/alert.mp3"></audio>
+
+    <template id="task-tpl">
+        <div class="item">
+            <div class="toggle_incomplete" @click="action('toggle_complete', todo.id)"></div>
+            <span class="title">
+                {{todo.title}}
+            </span>
+            <button @click="action('remove', todo.id)">删除</button>
+            <button @click="action('set_current', todo)">更新</button>
+            <button @click="action('toggle_detail', todo.id)">详情</button>
+            <div v-if="todo.show_detail" class="detail">
+                {{todo.desc || '暂无详情'}}
+            </div>
+        </div>
+    </template>
+
+
+
+
+    <script src="./lib/vue.js"></script>
+    <script src="./js/myStorage.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
+
+

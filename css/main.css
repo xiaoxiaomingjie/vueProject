@@ -1,0 +1,109 @@
+* {
+     box-sizing: border-box;
+     padding: 0;
+     margin: 0;
+ }
+.sidebar, .header {
+    text-align: center;
+}
+.sidebar {
+    background-color: #e40b0b;
+    color: #f5f5f5;
+    padding: 10px 0; //垂直居中
+}
+
+.sidebar h1 {
+    font-size: 26px;
+}
+
+.header {
+    padding: 20px 0;
+    color: #444;
+    font-size: 18px;
+
+}
+.wrap {
+    max-width: 600px;
+    margin: 0 auto;
+
+}
+input,button,textarea {
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin: 10px 0;
+}
+input:focus, textarea:focus {
+    border: 1px solid #e40b0b;
+}
+input,textarea {
+    outline: none;
+    display: block;
+    width: 100%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
+}
+
+button.primary {
+    background-color: #e40b0b;
+    color: #eee;
+}
+.detail {
+    font-size: 14px;
+}
+
+
+.task-list .item {
+
+    padding: 5px;
+    border-radius: 3px;
+}
+.task-list .item button {
+    font-size: 80%;
+    background-color: #fff;
+    display: none;
+}
+.task-list .item:hover {
+    background-color: rgba(0,0,0,.03);
+}
+.task-list .item:hover button {
+    display: inline-block;
+}
+.task-list .item .title {
+    padding: 10px;
+}
+.task-list .item .detail {
+    display: block;
+}
+.task-list .item > * {
+    padding: 5px;
+    display: inline-block;
+    line-height: 1.2;
+    vertical-align: middle;
+}
+
+#alert_sound {
+    display: none;
+}
+
+.toggle_complete,.toggle_incomplete {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+ .toggle_complete {
+    background-color: #d2caca;
+}
+
+.toggle_incomplete {
+    background-color: #46a6c7;
+}
+.segment-title {
+    color: #888;
+}
+
+
+
+
+
+
